@@ -9,9 +9,21 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <local:MainViewModel/>
-        
+
     </Window.DataContext>
-    <Grid>
-        <ListView ItemsSource="{Binding Words}" />
+    
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBox Grid.Row="0"/>
+        <Button  Grid.Row="1" Command="{Binding GenerateWordsCommand}"/>
+
+        <ListView Grid.Row="2" ItemsSource="{Binding Words}" />
     </Grid>
+
+
 </Window>
