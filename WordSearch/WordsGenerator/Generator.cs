@@ -4,9 +4,14 @@ using System.Text;
 
 namespace WordsGenerator
 {
-    public class Generator
+    public interface IGenerator
     {
-        public static List<Word> GetWords()
+        List<Word> GetWords();
+    }
+
+    public class Generator : IGenerator
+    {
+        public List<Word> GetWords()
         {
             List<Word> result = new List<Word>();
             for (int i = 0; i < Word.Alphabet.Count; i++)

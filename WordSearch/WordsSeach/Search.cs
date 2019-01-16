@@ -6,19 +6,23 @@ using WordsGenerator;
 
 namespace WordsSeach
 {
-    public class Search
+    public interface ISearch
     {
-        private static readonly object _lock = new object();
-        public static List<Word> Excecute(List<Word> words, string searchString, out TimeSpan searchDuration)
+        List<Word> Excecute(List<Word> words, string searchString, out TimeSpan searchDuration);
+    }
+    public class Search : ISearch
+    {
+        private readonly object _lock = new object();
+        Stopwatch _stopwatch = new Stopwatch();
+
+        public List<Word> Excecute(List<Word> words, string searchString, out TimeSpan searchDuration)
         {
             if (string.IsNullOrWhiteSpace(searchString))
                 return words;
 
             var result = new List<Word>();
 
-            var stopwatch = new Stopwatch();
-
-            stopwatch.Start();
+            _stopwatch.Start();
 
             Parallel.ForEach(words,
                 (x) =>
@@ -30,14 +34,11 @@ namespace WordsSeach
                         }
                 });
 
-            stopwatch.Stop();
+            _stopwatch.Stop();
 
-            searchDuration = stopwatch.Elapsed;
+            searchDuration = _stopwatch.Elapsed;
 
             return result;
-
-
-            
         }
 
     }

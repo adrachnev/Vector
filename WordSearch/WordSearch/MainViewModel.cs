@@ -20,6 +20,14 @@ namespace WordSearch
         private ICommand _command;
         private string _searchPattern;
         private string _searchDuration = "Search duration in ms:";
+        private readonly IGenerator _generator;
+        private readonly ISearch _search;
+
+        public MainViewModel(IGenerator generator, ISearch search)
+        {
+            _generator = generator;
+            _search = search;
+        }
 
         public string SearchDuration
         {
@@ -50,10 +58,10 @@ namespace WordSearch
                 if (Words == null)
                     return;
                 TimeSpan duration;
-                var result = Search.Excecute(_unfilterdList, _searchPattern, out duration);
+                var result = _search.Excecute(_unfilterdList, _searchPattern, out duration);
+                
                 Words = new ObservableCollection<Word>(result);
                 SearchDuration = string.Format("Search duration in ms: {0}", duration.TotalMilliseconds);
-
 
             }
         }
@@ -66,7 +74,7 @@ namespace WordSearch
                 {
                     if (_unfilterdList == null)
                     {
-                        _unfilterdList = Generator.GetWords();
+                        _unfilterdList = _generator.GetWords();
                         Words = new ObservableCollection<Word>(_unfilterdList);
                     }
                         

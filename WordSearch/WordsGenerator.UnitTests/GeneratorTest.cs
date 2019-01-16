@@ -13,7 +13,8 @@ namespace WordsGenerator.UnitTests
         [TestInitialize]
         public void Init()
         {
-            _generatedWords = Generator.GetWords();
+            IGenerator generator = new Generator();
+            _generatedWords = generator.GetWords();
         }
 
         [TestMethod]
