@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordSearch", "WordSearch\WordSearch.csproj", "{DF50B38F-5459-454E-B1D0-66A9FCD477E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "WordSearch\UI.csproj", "{DF50B38F-5459-454E-B1D0-66A9FCD477E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsGenerator", "WordsGenerator\WordsGenerator.csproj", "{E36621FB-E59C-48F6-8C65-C627FC28BAB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordsGenerator", "WordsGenerator\WordsGenerator.csproj", "{E36621FB-E59C-48F6-8C65-C627FC28BAB2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsGenerator.UnitTests", "WordsGenerator.UnitTests\WordsGenerator.UnitTests.csproj", "{F368DCC3-D5B5-408E-B442-33DCD33FC415}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsSeach", "WordsSeach\WordsSeach.csproj", "{4154D85D-3CE4-4752-BAC6-19FDC2224E6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsSearch.UnitTests", "WordsSearch.UnitTests\WordsSearch.UnitTests.csproj", "{CADDAABD-0BC4-47E4-9387-D41D90CC81CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{F368DCC3-D5B5-408E-B442-33DCD33FC415}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F368DCC3-D5B5-408E-B442-33DCD33FC415}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F368DCC3-D5B5-408E-B442-33DCD33FC415}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4154D85D-3CE4-4752-BAC6-19FDC2224E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4154D85D-3CE4-4752-BAC6-19FDC2224E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4154D85D-3CE4-4752-BAC6-19FDC2224E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4154D85D-3CE4-4752-BAC6-19FDC2224E6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CADDAABD-0BC4-47E4-9387-D41D90CC81CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CADDAABD-0BC4-47E4-9387-D41D90CC81CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CADDAABD-0BC4-47E4-9387-D41D90CC81CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CADDAABD-0BC4-47E4-9387-D41D90CC81CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
