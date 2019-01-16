@@ -9,13 +9,27 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WordsGenerator;
+using WordsSeach;
 
 namespace WordSearch
 {
     public class MainViewModel:INotifyPropertyChanged
     {
-        ObservableCollection<Word> _words;
+        private List<Word> _unfilterdList;
+        private ObservableCollection<Word> _words;
         private ICommand _command;
+        private string _searchPattern;
+        private string _searchDuration = "Search duration in ms:";
+
+        public string SearchDuration
+        {
+            get { return _searchDuration; }
+            set
+            {
+                _searchDuration = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public ObservableCollection<Word> Words
         {
@@ -26,7 +40,23 @@ namespace WordSearch
                 NotifyPropertyChanged();
             }
         }
-        
+
+        public string SearchPattern
+        {
+            get { return _searchPattern; }
+            set
+            {
+                _searchPattern = value;
+                if (Words == null)
+                    return;
+                TimeSpan duration;
+                var result = Search.Excecute(_unfilterdList, _searchPattern, out duration);
+                Words = new ObservableCollection<Word>(result);
+                SearchDuration = string.Format("Search duration in ms: {0}", duration.TotalMilliseconds);
+
+
+            }
+        }
 
         public ICommand GenerateWordsCommand
         {
@@ -34,8 +64,12 @@ namespace WordSearch
             {
                 return _command ?? (_command = new CommandHandler(() => 
                 {
-                    if (Words == null)
-                        Words = new ObservableCollection<Word>(Generator.GetWords());
+                    if (_unfilterdList == null)
+                    {
+                        _unfilterdList = Generator.GetWords();
+                        Words = new ObservableCollection<Word>(_unfilterdList);
+                    }
+                        
                 }, 
                 true));
             }
@@ -50,9 +84,5 @@ namespace WordSearch
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-        
     }
-    
-
 }

@@ -101,6 +101,10 @@
       <Project>{e36621fb-e59c-48f6-8c65-c627fc28bab2}</Project>
       <Name>WordsGenerator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WordsSeach\WordsSeach.csproj">
+      <Project>{4154d85d-3ce4-4752-bac6-19fdc2224e6f}</Project>
+      <Name>WordsSeach</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

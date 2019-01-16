@@ -15,14 +15,36 @@
     <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="5*"/>
+            
         </Grid.RowDefinitions>
-        
-        <TextBox Grid.Row="0"/>
-        <Button  Grid.Row="1" Command="{Binding GenerateWordsCommand}"/>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding Words}" />
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Content="Gererate words" 
+                    Command="{Binding GenerateWordsCommand}"/>
+            <Label Grid.Column="1"
+                   VerticalAlignment="Center" 
+                   HorizontalContentAlignment="Center"
+                   Content="Search pattern:" />
+            <TextBox Grid.Column="2"
+                     VerticalContentAlignment="Center"
+                     Text="{Binding SearchPattern, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Grid.Column="3"
+                   VerticalAlignment="Center" 
+                   HorizontalContentAlignment="Center"
+                   Content="{Binding SearchDuration}"/>
+        </Grid>
+        
+
+        <ListView Grid.Row="1" ItemsSource="{Binding Words}" />
     </Grid>
 
 
