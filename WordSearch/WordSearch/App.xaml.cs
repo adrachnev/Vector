@@ -22,8 +22,8 @@ namespace WordSearch
             base.OnStartup(e);
             IUnityContainer container = new UnityContainer();
 
-            container.RegisterType<IGenerator, Generator>();
-            container.RegisterType<ISearch, Search>();
+            container.RegisterSingleton<IGenerator, Generator>();
+            container.RegisterSingleton<ISearch, Search>();
 
             var viewModel = container.Resolve<MainViewModel>();
             var view = new MainWindow { DataContext = viewModel };

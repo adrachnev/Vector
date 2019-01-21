@@ -18,7 +18,7 @@ namespace WordsGenerator.UnitTests
         }
 
         [TestMethod]
-        public void WordsCountTest()
+        public void WordsCount()
         {
             int numberOfPositions = 4;
             
@@ -26,7 +26,7 @@ namespace WordsGenerator.UnitTests
         }
 
         [TestMethod]
-        public void WordsUniqueCombinationsTest()
+        public void WordsUniqueCombinations()
         {
             var distictList = _generatedWords.Distinct(new WordComparer());
 
@@ -34,7 +34,7 @@ namespace WordsGenerator.UnitTests
         }
 
         [TestMethod]
-        public void AlphabetCountTest()
+        public void AlphabetCount()
         {
             Assert.IsTrue(Word.Alphabet.Count == 26);
         }

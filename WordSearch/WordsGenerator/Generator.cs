@@ -4,8 +4,15 @@ using System.Text;
 
 namespace WordsGenerator
 {
+    /// <summary>
+    /// Words generator
+    /// </summary>
     public interface IGenerator
     {
+        /// <summary>
+        /// Gets the words.
+        /// </summary>
+        /// <returns></returns>
         List<Word> GetWords();
     }
 
