@@ -26,70 +26,69 @@ namespace WordsSearch.UnitTests
         [TestMethod]
         public void FindSingle()
         {
-            TimeSpan duration;
-            var result = _search.Excecute(_generatedWords, "aaaa", out duration);
+            
+            var result = _search.StartsWith(_generatedWords, "aaaa");
 
-            Assert.IsTrue(result.Count == 1);
-            Assert.IsTrue(duration.TotalMilliseconds > 0);
+            Assert.IsTrue(result.Item1.Count == 1);
+            Assert.IsTrue(result.Item2.TotalMilliseconds > 0);
 
-            result = _search.Excecute(_generatedWords, "ZZZZ", out duration);
-            Assert.IsTrue(result.Count == 1);
-            Assert.IsTrue(duration.TotalMilliseconds> 0);
+            result = _search.StartsWith(_generatedWords, "ZZZZ");
+            Assert.IsTrue(result.Item1.Count == 1);
+            Assert.IsTrue(result.Item2.TotalMilliseconds> 0);
         }
 
         [TestMethod]
         public void FindNone()
         {
-            TimeSpan duration;
-            var result = _search.Excecute(_generatedWords, "AAAAA", out duration);
+            var result = _search.StartsWith(_generatedWords, "AAAAA");
 
-            Assert.IsTrue(result.Count == 0);
-            Assert.IsTrue(duration.TotalMilliseconds > 0);
+            Assert.IsTrue(result.Item1.Count == 0);
+            Assert.IsTrue(result.Item2.TotalMilliseconds > 0);
         }
 
         [TestMethod]
         public void FindLast()
         {
-            TimeSpan duration;
-            var result = _search.Excecute(_generatedWords, "BBB", out duration);
+            
+            var result = _search.StartsWith(_generatedWords, "BBB");
 
-            Assert.IsTrue(result.Count == 26);
-            Assert.IsTrue(duration.TotalMilliseconds > 0);
+            Assert.IsTrue(result.Item1.Count == 26);
+            Assert.IsTrue(result.Item2.TotalMilliseconds > 0);
         }
 
         [TestMethod]
         public void FindLastButOne()
         {
-            TimeSpan duration;
-            var result = _search.Excecute(_generatedWords, "CC", out duration);
+            
+            var result = _search.StartsWith(_generatedWords, "CC");
 
-            Assert.IsTrue(result.Count == 26 * 26);
-            Assert.IsTrue(duration.TotalMilliseconds > 0);
+            Assert.IsTrue(result.Item1.Count == 26 * 26);
+            Assert.IsTrue(result.Item2.TotalMilliseconds > 0);
         }
 
         [TestMethod]
         public void FindSecond()
         {
-            TimeSpan duration;
-            var result = _search.Excecute(_generatedWords, "D", out duration);
+            
+            var result = _search.StartsWith(_generatedWords, "D");
 
-            Assert.IsTrue(result.Count == 26 * 26 * 26);
-            Assert.IsTrue(duration.TotalMilliseconds > 0);
+            Assert.IsTrue(result.Item1.Count == 26 * 26 * 26);
+            Assert.IsTrue(result.Item2.TotalMilliseconds > 0);
         }
 
         [TestMethod]
         public void EmptyString()
         {
-            TimeSpan duration;
-            var result = _search.Excecute(_generatedWords, string.Empty, out duration);
+            
+            var result = _search.StartsWith(_generatedWords, string.Empty);
 
-            Assert.IsTrue(result.Count == 26 * 26 * 26 * 26);
-            Assert.IsTrue(duration.TotalMilliseconds == 0);
+            Assert.IsTrue(result.Item1.Count == 26 * 26 * 26 * 26);
+            Assert.IsTrue(result.Item2.TotalMilliseconds == 0);
 
-            result = _search.Excecute(_generatedWords, null, out duration);
+            result = _search.StartsWith(_generatedWords, null);
 
-            Assert.IsTrue(result.Count == 26 * 26 * 26 * 26);
-            Assert.IsTrue(duration.TotalMilliseconds == 0);
+            Assert.IsTrue(result.Item1.Count == 26 * 26 * 26 * 26);
+            Assert.IsTrue(result.Item2.TotalMilliseconds == 0);
         }
 
         

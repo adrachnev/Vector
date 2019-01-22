@@ -11,24 +11,29 @@ namespace WordsSeach
     /// </summary>
     public interface ISearch
     {
+
+
         /// <summary>
-        /// Excecutes the specified words.
+        /// Searches words using "starts with".
         /// </summary>
         /// <param name="words">The words.</param>
         /// <param name="searchString">The search string.</param>
-        /// <param name="searchDuration">Duration of the search.</param>
-        /// <returns></returns>
-        List<Word> Excecute(List<Word> words, string searchString, out TimeSpan searchDuration);
+        /// <returns>result and duration</returns>
+        Tuple<List<Word>, TimeSpan> StartsWith(List<Word> words, string searchString);
+        
     }
     public class Search : ISearch
     {
         private readonly object _lock = new object();
+
         private Stopwatch _stopwatch = new Stopwatch();
 
-        public List<Word> Excecute(List<Word> words, string searchString, out TimeSpan searchDuration)
+
+        
+        public Tuple<List<Word>, TimeSpan> StartsWith(List<Word> words, string searchString)
         {
             if (string.IsNullOrWhiteSpace(searchString))
-                return words;
+                return new Tuple<List<Word>, TimeSpan>(words, new TimeSpan());
 
             var result = new List<Word>();
 
@@ -41,18 +46,22 @@ namespace WordsSeach
                 (x) =>
                 {
                     if (x.ToString().StartsWith(searchString, StringComparison.InvariantCultureIgnoreCase))
-                        lock(_lock)
-                        {
+                    {
+                        System.Diagnostics.Debug.WriteLine("Thread Id: {0}", System.Threading.Thread.CurrentThread.ManagedThreadId);
+                        lock (_lock)
+                        {   
                             result.Add(x);
                         }
+                    }
                 });
 
             _stopwatch.Stop();
 
-            searchDuration = _stopwatch.Elapsed;
+            var searchDuration = _stopwatch.Elapsed;
 
-            return result;
+            return new Tuple<List<Word>, TimeSpan>( result, searchDuration);
         }
 
+        
     }
 }

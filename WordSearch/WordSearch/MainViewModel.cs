@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using WordsGenerator;
 using WordsSeach;
 
@@ -57,12 +58,19 @@ namespace WordSearch
                 _searchPattern = value;
                 if (Words == null)
                     return;
-                TimeSpan duration;
-                var result = _search.Excecute(_unfilterdList, _searchPattern, out duration);
                 
-                Words = new ObservableCollection<Word>(result);
-                SearchDuration = string.Format("Search duration in ms: {0}", duration.TotalMilliseconds);
 
+                Dispatcher.CurrentDispatcher.InvokeAsync(async() => 
+                {
+                    Tuple<List<Word>, TimeSpan> result = null;
+                    await Task.Run(() => 
+                    {
+                        result = _search.StartsWith(_unfilterdList, _searchPattern);
+                    });
+
+                    Words = new ObservableCollection<Word>(result.Item1);
+                    SearchDuration = string.Format("Search duration in ms: {0}", result.Item2.TotalMilliseconds);
+                });
             }
         }
 
